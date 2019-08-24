@@ -6,6 +6,7 @@ import com.finalassignment.bookworm.service.AuthorService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -28,4 +29,11 @@ public class AuthorServiceImpl implements AuthorService {
     public List<Author> getAuthor() {
         return authorRepository.findAll();
     }
+
+    @Override
+    public Optional<Author> findById(Long authorId) {
+        return authorRepository.findById(authorId);
+    }
+
+
 }

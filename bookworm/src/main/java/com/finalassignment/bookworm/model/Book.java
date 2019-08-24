@@ -1,7 +1,6 @@
 package com.finalassignment.bookworm.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,17 +25,15 @@ public class Book {
     private String bookName;
 
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "author_Id")
-    @JsonBackReference
-    @JsonIgnore
+    @JsonBackReference(value = "book-author")
     private Author author;
 
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "genre_Id")
-    @JsonBackReference
-    @JsonIgnore
+    @JsonBackReference(value = "book-genre")
     private Genre genre;
 
 

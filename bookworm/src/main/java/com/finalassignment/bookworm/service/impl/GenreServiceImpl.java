@@ -6,6 +6,7 @@ import com.finalassignment.bookworm.service.GenreService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GenreServiceImpl implements GenreService {
@@ -29,4 +30,12 @@ public class GenreServiceImpl implements GenreService {
 
         return genreRepository.findAll();
     }
+
+    @Override
+    public Optional<Genre> findById(Long genreId) {
+        return genreRepository.findById(genreId);
+//        /*.orElseThrow(() -> new CustomerNotFoundException(customerId)*/
+    }
+
+
 }

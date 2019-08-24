@@ -28,7 +28,6 @@ public class Genre {
     private String genreName;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "genre")
-    @JsonManagedReference
-    @JsonIgnore
+    @JsonManagedReference(value = "book-genre")
     private List<Book> books;
 }

@@ -30,7 +30,6 @@ public class Author {
     private String authorName;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
-    @JsonManagedReference
-    @JsonIgnore
+    @JsonManagedReference(value = "book-author")
     private List<Book> books;
 }
