@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Setter
 @Getter
@@ -22,6 +23,7 @@ public class Book {
     private Long bookId;
 
     @Column(name = "book_name")
+    @Size(max = 60)
     private String bookName;
 
 

@@ -9,5 +9,5 @@ public interface AuthorService {
 
     Author addAuthor(Author author);
     List<Author> getAuthor();
-    Optional<Author> findById(Long authorId);
+    Author findById(Long authorId);
 }

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Setter
@@ -25,6 +26,7 @@ public class Genre {
     private Long genreId;
 
     @Column(name = "genre_name")
+    @Size(max = 50)
     private String genreName;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "genre")

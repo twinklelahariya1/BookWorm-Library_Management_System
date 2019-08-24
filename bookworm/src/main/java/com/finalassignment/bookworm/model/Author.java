@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 
@@ -27,6 +28,7 @@ public class Author {
     private Long authorId;
 
     @Column(name = "author_name")
+    @Size(max = 50)
     private String authorName;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")

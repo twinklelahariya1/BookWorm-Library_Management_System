@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class GenreController {
@@ -33,7 +32,7 @@ public class GenreController {
     @GetMapping(value = "/bookworm/showGenre/{genre_id}")
     public Genre getGenreById(@PathVariable Long genre_id) {
 //        log.debug("Getting Customers By Id.");
-        return genreService.findById(genre_id).orElseThrow(()-> new GenreNotFoundException(genre_id));
+        return genreService.findById(genre_id);
     }
 
     @GetMapping("/bookworm/showAllGenres")

@@ -7,3 +7,4 @@ public class AuthorNotFoundException extends IllegalArgumentException {
         this.authorId = authorId;
     }
 }
+

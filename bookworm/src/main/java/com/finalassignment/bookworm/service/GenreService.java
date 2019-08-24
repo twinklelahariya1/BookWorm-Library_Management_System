@@ -9,5 +9,5 @@ public interface GenreService {
 
     Genre addGenre(Genre genre);
     List<Genre> getGenre();
-    Optional<Genre> findById(Long genreId);
+    Genre findById(Long genreId);
 }

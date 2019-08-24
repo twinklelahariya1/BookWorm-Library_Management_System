@@ -1,12 +1,12 @@
 package com.finalassignment.bookworm.service.impl;
 
+import com.finalassignment.bookworm.exception.AuthorNotFoundException;
 import com.finalassignment.bookworm.model.Author;
 import com.finalassignment.bookworm.repository.AuthorRepository;
 import com.finalassignment.bookworm.service.AuthorService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -31,8 +31,8 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Optional<Author> findById(Long authorId) {
-        return authorRepository.findById(authorId);
+    public Author findById(Long authorId) {
+        return authorRepository.findById(authorId).orElseThrow(() -> new AuthorNotFoundException(authorId));
     }
 
 

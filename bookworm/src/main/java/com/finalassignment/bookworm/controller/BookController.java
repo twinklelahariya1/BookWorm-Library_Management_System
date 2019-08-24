@@ -34,8 +34,8 @@ public class BookController {
     @PostMapping("/bookworm/populateBook/{authorId}/{genreId}")
     public ResponseEntity<Book> populateBook(@RequestBody Book book,@PathVariable Long authorId,@PathVariable Long genreId) {
 
-        Author author = authorService.findById(authorId).orElseThrow(()->new AuthorNotFoundException(authorId));
-        Genre genre = genreService.findById(genreId).orElseThrow(()-> new GenreNotFoundException(genreId));
+        Author author = authorService.findById(authorId);
+        Genre genre = genreService.findById(genreId);
 
         book.setAuthor(author);
         book.setGenre(genre);
