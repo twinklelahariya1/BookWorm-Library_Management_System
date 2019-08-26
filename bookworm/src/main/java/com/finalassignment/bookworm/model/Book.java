@@ -1,6 +1,7 @@
 package com.finalassignment.bookworm.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Setter
 @Getter
@@ -15,11 +17,10 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @Entity
 @Table(name = "book")
-@SequenceGenerator(initialValue = 1, name = "sequence")
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookId;
 
     @Column(name = "book_name")
@@ -39,8 +40,9 @@ public class Book {
     private Genre genre;
 
 
-    @Column(name = "quantity_of_book")
-    private Long quantityOfBooksAvailableInLibrary;
+    @OneToMany(mappedBy = "books")
+    @JsonManagedReference(value = "book-issue-book")
+    private List<IssuedBooks> issuedBooks;
 
 
 }

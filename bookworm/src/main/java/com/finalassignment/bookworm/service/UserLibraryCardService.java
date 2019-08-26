@@ -9,4 +9,5 @@ public interface UserLibraryCardService {
 
     UserLibraryCard addLibraryCardEntry(UserLibraryCard userLibraryCard);
     List<UserLibraryCard> getCardDetails();
+    UserLibraryCard findById(Long uId);
 }

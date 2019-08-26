@@ -4,12 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import net.bytebuddy.implementation.bind.annotation.Default;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Setter
@@ -34,7 +32,7 @@ public class User {
     Long userContactNumber;
 
 
-    @Column(name = "user_email",unique = true)
+    @Column(name = "user_email", unique = true)
     @Size(max = 50)
     @Email
     String userEmail;

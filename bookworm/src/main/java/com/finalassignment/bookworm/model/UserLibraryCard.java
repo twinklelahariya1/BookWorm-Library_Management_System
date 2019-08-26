@@ -1,12 +1,13 @@
 package com.finalassignment.bookworm.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.List;
 
 @Setter
 @Getter
@@ -18,25 +19,18 @@ import java.util.Date;
 public class UserLibraryCard {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long cardId;
 
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "book_id", nullable = false)
-    private Book book;
-
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToMany(mappedBy = "userLibraryCard")
+    @JsonManagedReference(value = "issue-book-library-card")
+    private List<IssuedBooks> issuedBooks;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "issue_date")
-    Date issueDate;
 
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "return_date")
-    Date returnDate;
 }

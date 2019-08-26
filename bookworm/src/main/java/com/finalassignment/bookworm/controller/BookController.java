@@ -1,8 +1,7 @@
 package com.finalassignment.bookworm.controller;
 
 
-import com.finalassignment.bookworm.exception.AuthorNotFoundException;
-import com.finalassignment.bookworm.exception.GenreNotFoundException;
+import com.finalassignment.bookworm.exception.BookNotFoundException;
 import com.finalassignment.bookworm.model.Author;
 import com.finalassignment.bookworm.model.Book;
 import com.finalassignment.bookworm.model.Genre;
@@ -45,10 +44,22 @@ public class BookController {
 
     }
 
+    @GetMapping(value = "/bookworm/showBook/{book_id}")
+    public Book getBookById(@PathVariable Long book_id) {
+//        log.debug("Getting Customers By Id.");
+        return bookService.findById(book_id);
+    }
 
     @GetMapping("/bookworm/showAllBooks")
     public ResponseEntity<List> showAllBooks() {
         return ResponseEntity.ok(bookService.getBook());
 
     }
+
+//    @GetMapping("/showBook/{book_id}")
+//    public Book getBookById(@PathVariable Long book_id) {
+////        log.debug("Getting Customers By Id.");
+//        return bookRepository.findById(book_id).orElseThrow(()-> new BookNotFoundException(book_id));
+//    }
+
 }

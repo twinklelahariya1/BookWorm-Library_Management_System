@@ -20,7 +20,6 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "author")
-@SequenceGenerator(initialValue = 1, name = "sequence")
 public class Author {
 
     @Id

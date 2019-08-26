@@ -17,7 +17,6 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @Entity
 @Table(name = "admin")
-@SequenceGenerator(initialValue = 1, name = "sequence")
 public class Admin {
 
     @Id
@@ -39,6 +38,6 @@ public class Admin {
 
     @Column(name = "admin_password")
     @Size(max = 50)
-        String adminPassword;
+    String adminPassword;
 
 }
