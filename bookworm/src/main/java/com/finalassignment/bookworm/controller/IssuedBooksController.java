@@ -1,10 +1,11 @@
 package com.finalassignment.bookworm.controller;
 
 
-import com.finalassignment.bookworm.exception.UserLibraryCardNotFoundException;
 import com.finalassignment.bookworm.model.Book;
+import com.finalassignment.bookworm.model.BookInventory;
 import com.finalassignment.bookworm.model.IssuedBooks;
 import com.finalassignment.bookworm.model.UserLibraryCard;
+import com.finalassignment.bookworm.service.impl.BookInventoryServiceImpl;
 import com.finalassignment.bookworm.service.impl.BookServiceImpl;
 import com.finalassignment.bookworm.service.impl.IssuedBooksServiceImpl;
 import com.finalassignment.bookworm.service.impl.UserLibraryCardServiceImpl;
@@ -21,11 +22,13 @@ public class IssuedBooksController {
     private final IssuedBooksServiceImpl issuedBooksService;
     private final BookServiceImpl bookService;
     private  final UserLibraryCardServiceImpl userLibraryCardService;
+    private final BookInventoryServiceImpl bookInventoryService;
 
-    public IssuedBooksController(IssuedBooksServiceImpl issuedBooksService, BookServiceImpl bookService, UserLibraryCardServiceImpl userLibraryCardService) {
+    public IssuedBooksController(IssuedBooksServiceImpl issuedBooksService, BookServiceImpl bookService, UserLibraryCardServiceImpl userLibraryCardService, BookInventoryServiceImpl bookInventoryService) {
         this.issuedBooksService = issuedBooksService;
         this.bookService = bookService;
         this.userLibraryCardService = userLibraryCardService;
+        this.bookInventoryService = bookInventoryService;
     }
 
     @GetMapping("/bookworm/showAllIssuedBooks")
@@ -36,6 +39,12 @@ public class IssuedBooksController {
 
     @PostMapping("/bookworm/issueBook/{bookId}/{cardId}")
     public ResponseEntity<IssuedBooks> addIssueBook(@RequestBody IssuedBooks issuedBooks, @PathVariable Long bookId, @PathVariable Long cardId) {
+
+
+        BookInventory bookInventory= bookInventoryService.findById(bookId);
+        bookInventory.setQuantityOfBooks(bookInventory.getQuantityOfBooks()-1);
+        bookInventoryService.addBookInventoryEntry(bookInventory);
+
         Book book = bookService.findById(bookId);
         issuedBooks.setBooks(book);
 
@@ -43,5 +52,13 @@ public class IssuedBooksController {
         issuedBooks.setUserLibraryCard(userLibraryCard);
 
         return new ResponseEntity(issuedBooksService.addBooksToCard(issuedBooks), new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @PostMapping("/bookworm/returnBook/{issueId}")
+    public ResponseEntity<IssuedBooks> returnBook(@PathVariable Long issueId){
+
+
+
+        return null;
     }
 }

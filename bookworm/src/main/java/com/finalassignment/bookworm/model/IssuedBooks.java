@@ -8,7 +8,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Setter
 @Getter
@@ -20,18 +20,14 @@ import java.util.Date;
 public class IssuedBooks {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY  )
     Long issueId;
 
     @Column(name = "issue_date")
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date issueDate;
+    private LocalDate issueDate;
 
     @Column(name = "return_date")
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date returnDate;
+    private LocalDate returnDate;
 
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @Entity
 @Getter
@@ -18,6 +20,8 @@ public class BookInventory {
     Long inventoryId;
 
     @Column(name = "quantity_of_books")
+    @Min(0)
+    @Max(5)
     private Long quantityOfBooks;
 
     @OneToOne(cascade = CascadeType.ALL)
