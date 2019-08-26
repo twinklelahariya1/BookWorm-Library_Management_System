@@ -30,13 +30,13 @@ public class IssuedBooks {
     private LocalDate returnDate;
 
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
     @JsonBackReference(value = "book-issue-book")
     private Book books;
 
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "library_card_id")
     @JsonBackReference(value = "issue-book-library-card")
     private UserLibraryCard userLibraryCard;

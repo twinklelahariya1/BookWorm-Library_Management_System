@@ -1,6 +1,7 @@
 package com.finalassignment.bookworm.service.impl;
 
 
+import com.finalassignment.bookworm.exception.IssueBookNotFoundException;
 import com.finalassignment.bookworm.model.IssuedBooks;
 import com.finalassignment.bookworm.repository.IssuedBooksRepository;
 import com.finalassignment.bookworm.service.IssuedBooksService;
@@ -26,5 +27,16 @@ public class IssuedBooksServiceImpl implements IssuedBooksService {
     @Override
     public List<IssuedBooks> getIssuedBookDetails() {
         return issuedBooksRepository.findAll();
+    }
+
+    @Override
+    public IssuedBooks findById(Long issueId) {
+        return issuedBooksRepository.findById(issueId).orElseThrow(()-> new IssueBookNotFoundException(issueId));
+    }
+
+
+    @Override
+    public void deleteIssue(Long issueId) {
+        issuedBooksRepository.deleteById(issueId);
     }
 }

@@ -54,11 +54,20 @@ public class IssuedBooksController {
         return new ResponseEntity(issuedBooksService.addBooksToCard(issuedBooks), new HttpHeaders(), HttpStatus.OK);
     }
 
-    @PostMapping("/bookworm/returnBook/{issueId}")
-    public ResponseEntity<IssuedBooks> returnBook(@PathVariable Long issueId){
+    @DeleteMapping("/bookworm/returnBook/{issueId}")
+    public ResponseEntity<Object> returnBook(@PathVariable Long issueId){
+
+        IssuedBooks issuedBooks=issuedBooksService.findById(issueId);
+        Book book= issuedBooks.getBooks();
+        Long bookId=book.getBookId();
+
+        BookInventory bookInventory= bookInventoryService.findById(bookId);
+        bookInventory.setQuantityOfBooks(bookInventory.getQuantityOfBooks()+1);
+        bookInventoryService.addBookInventoryEntry(bookInventory);
 
 
+        issuedBooksService.deleteIssue(issueId);
 
-        return null;
+        return  ResponseEntity.status(HttpStatus.OK).body("The data is deleted");
     }
 }
