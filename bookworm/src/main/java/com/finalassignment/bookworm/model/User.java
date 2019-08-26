@@ -42,5 +42,5 @@ public class User {
     String userPassword;
 
     @Column(name = "fine")
-    Long userTotalFineAmount;
+    int userTotalFineAmount;
 }
