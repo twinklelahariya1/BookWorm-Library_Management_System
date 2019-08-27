@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
