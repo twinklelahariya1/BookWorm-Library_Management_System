@@ -1,5 +1,6 @@
 package com.finalassignment.bookworm.repository;
 
+import com.finalassignment.bookworm.dto.AdminDto;
 import com.finalassignment.bookworm.model.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

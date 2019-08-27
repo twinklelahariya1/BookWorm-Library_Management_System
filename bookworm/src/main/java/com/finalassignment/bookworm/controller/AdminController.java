@@ -1,6 +1,6 @@
 package com.finalassignment.bookworm.controller;
 
-import com.finalassignment.bookworm.model.Admin;
+import com.finalassignment.bookworm.dto.AdminDto;
 import com.finalassignment.bookworm.service.impl.AdminServiceImpl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,22 +19,23 @@ public class AdminController {
     }
 
     @PostMapping("/bookworm/populateAdmin")
-    public ResponseEntity<Admin> populateAdmin(@RequestBody Admin admin) {
+    public ResponseEntity<AdminDto> populateAdmin(@RequestBody AdminDto adminDto) {
 
-        Admin addAdmin = adminService.addAdmin(admin);
+        AdminDto addAdmin = adminService.addAdmin(adminDto);
         return new ResponseEntity(addAdmin, new HttpHeaders(), HttpStatus.OK);
 
     }
 
 
     @GetMapping(value = "/bookworm/showAdmin/{admin_id}")
-    public Admin getAdminById(@PathVariable Long admin_id) {
-//        log.debug("Getting Customers By Id.");
+    public AdminDto  getAdminById(@PathVariable Long admin_id) {
+//      log.debug("Getting Customers By Id.");
         return adminService.findById(admin_id);
     }
 
     @GetMapping("/bookworm/showAllAdmins")
     public ResponseEntity<List> showAllAdmins() {
+
         return ResponseEntity.ok(adminService.getAdmin());
 
     }

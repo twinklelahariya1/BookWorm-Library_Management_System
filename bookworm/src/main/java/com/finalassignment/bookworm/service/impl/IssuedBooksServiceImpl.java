@@ -34,7 +34,6 @@ public class IssuedBooksServiceImpl implements IssuedBooksService {
         return issuedBooksRepository.findById(issueId).orElseThrow(()-> new IssueBookNotFoundException(issueId));
     }
 
-
     @Override
     public void deleteIssue(Long issueId) {
         issuedBooksRepository.deleteById(issueId);

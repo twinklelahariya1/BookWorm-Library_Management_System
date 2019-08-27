@@ -42,5 +42,6 @@ public class User {
     private String userPassword;
 
     @Column(name = "fine")
+
     int userTotalFineAmount;
 }

@@ -1,7 +1,6 @@
 package com.finalassignment.bookworm.controller;
 
 
-import com.finalassignment.bookworm.exception.BookNotFoundException;
 import com.finalassignment.bookworm.model.Author;
 import com.finalassignment.bookworm.model.Book;
 import com.finalassignment.bookworm.model.Genre;
@@ -19,9 +18,7 @@ import java.util.List;
 public class BookController {
 
     private final BookServiceImpl bookService;
-
     private  final AuthorServiceImpl authorService;
-
     private final GenreServiceImpl genreService;
 
     public BookController(BookServiceImpl bookService, AuthorServiceImpl authorService, GenreServiceImpl genreService) {
@@ -39,8 +36,7 @@ public class BookController {
         book.setAuthor(author);
         book.setGenre(genre);
 
-        Book addBook = bookService.addBook(book);
-        return new ResponseEntity(addBook, new HttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity(bookService.addBook(book), new HttpHeaders(), HttpStatus.OK);
 
     }
 
@@ -52,14 +48,9 @@ public class BookController {
 
     @GetMapping("/bookworm/showAllBooks")
     public ResponseEntity<List> showAllBooks() {
+
         return ResponseEntity.ok(bookService.getBook());
 
     }
-
-//    @GetMapping("/showBook/{book_id}")
-//    public Book getBookById(@PathVariable Long book_id) {
-////        log.debug("Getting Customers By Id.");
-//        return bookRepository.findById(book_id).orElseThrow(()-> new BookNotFoundException(book_id));
-//    }
 
 }
