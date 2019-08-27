@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,14 +26,14 @@ public class BookInventoryController {
     }
 
 
-    @PostMapping("/bookworm/{bookId}/inventory")
-    public ResponseEntity<BookInventory> addInventory(@RequestBody BookInventory bookInventory, @PathVariable Long bookId) {
+    @PostMapping("/bookworm/populateInventory/{bookId}")
+    public ResponseEntity<BookInventory> populateInventory(@Valid @RequestBody BookInventory bookInventory, @PathVariable Long bookId) {
         Book book = bookService.findById(bookId);
         bookInventory.setBook(book);
         return new ResponseEntity(bookInventoryService.addBookInventoryEntry(bookInventory), new HttpHeaders(), HttpStatus.OK);
     }
 
-    @GetMapping("/bookworm/inventory")
+    @GetMapping("/bookworm/showInventory")
     public List<BookInventory> showInventory() {
         return bookInventoryService.getBookInventoryDetails();
     }

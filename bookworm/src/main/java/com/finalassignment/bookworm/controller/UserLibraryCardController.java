@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,8 +31,8 @@ public class UserLibraryCardController {
     }
 
 
-    @PostMapping("/bookworm/populateCard/{userId}/{bookId}")
-    public ResponseEntity<UserLibraryCard> populateCard(@RequestBody UserLibraryCard userLibraryCard, @PathVariable Long userId, @PathVariable Long bookId) {
+    @PostMapping("/bookworm/generateUserCard/{userId}/{bookId}")
+    public ResponseEntity<UserLibraryCard> generateUserCard(@Valid @RequestBody UserLibraryCard userLibraryCard, @PathVariable Long userId, @PathVariable Long bookId) {
 
         Book book = bookService.findById(userId);
         User user = userService.findById(userId);
@@ -48,7 +49,7 @@ public class UserLibraryCardController {
     }
 
     @PostMapping("/bookworm/issue/{userId}")
-    public ResponseEntity<UserLibraryCard> addIssue(@RequestBody UserLibraryCard userLibraryCard, @PathVariable Long userId) {
+    public ResponseEntity<UserLibraryCard> addIssue(@Valid @RequestBody UserLibraryCard userLibraryCard, @PathVariable Long userId) {
         User user = userService.findById(userId);
         userLibraryCard.setUser(user);
         return new ResponseEntity(userLibraryCardService.addLibraryCardEntry(userLibraryCard), new HttpHeaders(), HttpStatus.OK);

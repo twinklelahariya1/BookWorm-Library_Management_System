@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,8 +19,8 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @PostMapping("/bookworm/populateAdmin")
-    public ResponseEntity<AdminDto> populateAdmin(@RequestBody AdminDto adminDto) {
+    @PostMapping("/bookworm/addAdmin")
+    public ResponseEntity<AdminDto> addAdmin(@Valid @RequestBody AdminDto adminDto) {
 
         AdminDto addAdmin = adminService.addAdmin(adminDto);
         return new ResponseEntity(addAdmin, new HttpHeaders(), HttpStatus.OK);
@@ -27,8 +28,8 @@ public class AdminController {
     }
 
 
-    @GetMapping(value = "/bookworm/showAdmin/{admin_id}")
-    public AdminDto  getAdminById(@PathVariable Long admin_id) {
+    @GetMapping(value = "/bookworm/showAdminById/{admin_id}")
+    public AdminDto  showAdminById(@PathVariable Long admin_id) {
 //      log.debug("Getting Customers By Id.");
         return adminService.findById(admin_id);
     }

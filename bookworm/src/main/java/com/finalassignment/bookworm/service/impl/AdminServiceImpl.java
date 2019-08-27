@@ -2,7 +2,6 @@ package com.finalassignment.bookworm.service.impl;
 
 import com.finalassignment.bookworm.dto.AdminDto;
 import com.finalassignment.bookworm.exception.AdminNotFoundException;
-import com.finalassignment.bookworm.exception.AuthorNotFoundException;
 import com.finalassignment.bookworm.model.Admin;
 import com.finalassignment.bookworm.repository.AdminRepository;
 import com.finalassignment.bookworm.service.AdminService;
@@ -36,14 +35,11 @@ public class AdminServiceImpl implements AdminService {
 
     private static Admin fromAdminDto(final AdminDto adminDto) {
 
-        Admin admin = new Admin();
-        admin.setAdminId(adminDto.getAdminId());
-        admin.setAdminName(adminDto.getAdminName());
-        admin.setAdminContactNumber(adminDto.getAdminContactNumber());
-        admin.setAdminEmail(adminDto.getAdminEmail());
-        admin.setAdminPassword(adminDto.getAdminPassword());
-
-        return admin;
+        return Admin.builder().adminContactNumber(adminDto.getAdminContactNumber())
+                .adminEmail(adminDto.getAdminEmail()).adminId(adminDto.getAdminId())
+                .adminName(adminDto.getAdminName())
+                .adminPassword(adminDto.getAdminPassword())
+                .build();
     }
 
     @Override
@@ -56,7 +52,7 @@ public class AdminServiceImpl implements AdminService {
     public List<AdminDto> getAdmin() {
         List<Admin> admins = adminRepository.findAll();
         List<AdminDto> adminDtos = null;
-        if(!CollectionUtils.isEmpty(admins)){
+        if (!CollectionUtils.isEmpty(admins)) {
             adminDtos = new ArrayList<>();
             for (Admin admin : admins) {
                 AdminDto adminDto = fromAdmin(admin);
@@ -69,8 +65,8 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public AdminDto findById(Long adminId) {
 
-        Admin admin=adminRepository.findById(adminId).orElseThrow(()->new  AdminNotFoundException(adminId));
-        AdminDto adminDto=fromAdmin(admin);
+        Admin admin = adminRepository.findById(adminId).orElseThrow(() -> new AdminNotFoundException(adminId));
+        AdminDto adminDto = fromAdmin(admin);
         return adminDto;
     }
 }

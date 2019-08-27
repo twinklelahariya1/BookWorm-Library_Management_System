@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -36,7 +37,7 @@ public class IssuedBooksController {
     }
 
     @PostMapping("/bookworm/issueBook/{bookId}/{cardId}")
-    public ResponseEntity<IssuedBooks> addIssueBook(@RequestBody IssuedBooks issuedBooks, @PathVariable Long bookId, @PathVariable Long cardId) {
+    public ResponseEntity<IssuedBooks> issueBook(@Valid @RequestBody IssuedBooks issuedBooks, @PathVariable Long bookId, @PathVariable Long cardId) {
 
 
         BookInventory bookInventory= bookInventoryService.findById(bookId);

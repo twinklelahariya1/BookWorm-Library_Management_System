@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,8 +21,8 @@ public class GenreController {
         this.genreService = genreService;
     }
 
-    @PostMapping("/bookworm/populateGenre")
-    public ResponseEntity<Genre> populateGenre(@RequestBody Genre genre) {
+    @PostMapping("/bookworm/addGenre")
+    public ResponseEntity<Genre> addGenre(@Valid @RequestBody Genre genre) {
 
         Genre addGenre = genreService.addGenre(genre);
         return new ResponseEntity(addGenre, new HttpHeaders(), HttpStatus.OK);
@@ -29,8 +30,8 @@ public class GenreController {
     }
 
 
-    @GetMapping(value = "/bookworm/showGenre/{genre_id}")
-    public Genre getGenreById(@PathVariable Long genre_id) {
+    @GetMapping(value = "/bookworm/showGenreById/{genre_id}")
+    public Genre showGenreById(@PathVariable Long genre_id) {
 //        log.debug("Getting Customers By Id.");
         return genreService.findById(genre_id);
     }

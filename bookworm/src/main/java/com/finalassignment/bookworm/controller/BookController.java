@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,8 +28,8 @@ public class BookController {
         this.genreService = genreService;
     }
 
-    @PostMapping("/bookworm/populateBook/{authorId}/{genreId}")
-    public ResponseEntity<Book> populateBook(@RequestBody Book book,@PathVariable Long authorId,@PathVariable Long genreId) {
+    @PostMapping("/bookworm/addBook/{authorId}/{genreId}")
+    public ResponseEntity<Book> addBook(@Valid @RequestBody Book book, @PathVariable Long authorId, @PathVariable Long genreId) {
 
         Author author = authorService.findById(authorId);
         Genre genre = genreService.findById(genreId);
@@ -40,8 +41,8 @@ public class BookController {
 
     }
 
-    @GetMapping(value = "/bookworm/showBook/{book_id}")
-    public Book getBookById(@PathVariable Long book_id) {
+    @GetMapping(value = "/bookworm/showBookById/{book_id}")
+    public Book showBookById(@PathVariable Long book_id) {
 //        log.debug("Getting Customers By Id.");
         return bookService.findById(book_id);
     }
