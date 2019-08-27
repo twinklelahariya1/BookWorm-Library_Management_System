@@ -79,18 +79,10 @@ public class IssuedBooksController {
             user.setUserTotalFineAmount(user.getUserTotalFineAmount()+fine);
         }
 
-
-
         issuedBooksService.deleteIssue(issueId);
 
         return  ResponseEntity.status(HttpStatus.OK).body("The data is deleted");
     }
 
-    @PostMapping("/bookworm/payFine/{userId}")
-    public ResponseEntity<Object> addIssueBook(@PathVariable Long userId){
 
-        User user=userService.findById(userId);
-        user.setUserTotalFineAmount(0);
-        return ResponseEntity.status(HttpStatus.OK).body("Amount paid");
-    }
 }

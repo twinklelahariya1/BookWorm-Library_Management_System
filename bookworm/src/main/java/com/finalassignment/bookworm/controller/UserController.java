@@ -38,4 +38,12 @@ public class UserController {
     public ResponseEntity<List> showAllUsers() {
         return ResponseEntity.ok(userService.getUser());
     }
+
+    @PostMapping("/bookworm/payFine/{userId}")
+    public ResponseEntity<Object> addIssueBook(@PathVariable Long userId){
+
+        User user=userService.findById(userId);
+        user.setUserTotalFineAmount(0);
+        return ResponseEntity.status(HttpStatus.OK).body("Amount paid");
+    }
 }

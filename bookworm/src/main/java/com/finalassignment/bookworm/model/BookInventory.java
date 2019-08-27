@@ -17,7 +17,7 @@ public class BookInventory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long inventoryId;
+    private Long inventoryId;
 
     @Column(name = "quantity_of_books")
     @Min(0)

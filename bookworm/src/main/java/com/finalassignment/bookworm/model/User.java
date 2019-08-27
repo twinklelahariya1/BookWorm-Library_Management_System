@@ -21,25 +21,25 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    Long userId;
+    private Long userId;
 
     @Column(name = "user_name")
     @Size(max = 50)
-    String userName;
+    private String userName;
 
     @Column(name = "user_number")
     @NotNull
-    Long userContactNumber;
+    private Long userContactNumber;
 
 
     @Column(name = "user_email", unique = true)
     @Size(max = 50)
     @Email
-    String userEmail;
+    private String userEmail;
 
     @Column(name = "user_password")
     @Size(max = 50)
-    String userPassword;
+    private String userPassword;
 
     @Column(name = "fine")
     int userTotalFineAmount;

@@ -20,7 +20,7 @@ public class UserLibraryCard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long cardId;
+    private Long cardId;
 
 
     @OneToOne(cascade = CascadeType.ALL)

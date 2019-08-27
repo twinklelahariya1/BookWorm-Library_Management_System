@@ -22,7 +22,7 @@ public class IssuedBooks {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY  )
-    Long issueId;
+    private Long issueId;
 
     @Column(name = "issue_date")
     private LocalDate issueDate;
