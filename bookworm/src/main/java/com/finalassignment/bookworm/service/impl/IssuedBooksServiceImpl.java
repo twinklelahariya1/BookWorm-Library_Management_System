@@ -54,6 +54,7 @@ public class IssuedBooksServiceImpl implements IssuedBooksService {
     @Override
     public void deleteIssue(Long issueId) {
 
+        deletionUtil(issueId);
         issuedBooksRepository.deleteById(issueId);
     }
 
@@ -64,7 +65,6 @@ public class IssuedBooksServiceImpl implements IssuedBooksService {
 
         BookInventory bookInventory = bookInventoryService.findById(bookId);
         bookInventory.setQuantityOfBooks(bookInventory.getQuantityOfBooks() + 1);
-        bookInventoryService.addBookInventoryEntry(fromBookInventory(bookInventory),book);
 
         LocalDate issueDate = issuedBooks.getIssueDate();
         LocalDate returnDate = LocalDate.now();

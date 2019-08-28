@@ -47,8 +47,6 @@ public class IssuedBooksController {
 
         BookInventory bookInventory= bookInventoryService.findById(bookId);
         bookInventory.setQuantityOfBooks(bookInventory.getQuantityOfBooks()-1);
-        bookInventoryService.addBookInventoryEntry(fromBookInventory(bookInventory),book);
-
         return new ResponseEntity(issuedBooksService.addBooksToCard(issuedBooksDto, book, userLibraryCard), new HttpHeaders(), HttpStatus.OK);
     }
     @DeleteMapping("/bookworm/returnBook/{issueId}")

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+import static com.finalassignment.bookworm.util.DtoUtil.fromUser;
+
 @RestController
 public class UserController {
 
@@ -41,12 +43,12 @@ public class UserController {
     }
 
 
-    //refactor
-    @PostMapping("/bookworm/payFine/{userId}")
-    public ResponseEntity<Object> payFine(@PathVariable Long userId){
+    @PatchMapping("/bookworm/payFine/{userId}")
+    public ResponseEntity<Object> payFine(@PathVariable Long userId) {
 
-        User user=userService.findById(userId);
+        User user = userService.findById(userId);
         user.setUserTotalFineAmount(0);
+        userService.addUser(fromUser(user));
         return ResponseEntity.status(HttpStatus.OK).body("Amount paid");
     }
 }
