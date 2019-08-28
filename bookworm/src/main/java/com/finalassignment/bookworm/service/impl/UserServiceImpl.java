@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.finalassignment.bookworm.util.DtoUtil.fromUser;
 import static com.finalassignment.bookworm.util.DtoUtil.fromUserDto;
 
 @Service
@@ -37,6 +38,13 @@ public class UserServiceImpl implements UserService {
     public User findById(Long userId) {
 
         return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+
+    }
+
+    public void resetFine(Long userId){
+        User user = userRepository.findById(userId).orElseThrow(()->new UserNotFoundException(userId) );
+        user.setUserTotalFineAmount(0);
+        userRepository.save(user);
 
     }
 

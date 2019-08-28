@@ -46,9 +46,7 @@ public class UserController {
     @PatchMapping("/bookworm/payFine/{userId}")
     public ResponseEntity<Object> payFine(@PathVariable Long userId) {
 
-        User user = userService.findById(userId);
-        user.setUserTotalFineAmount(0);
-        userService.addUser(fromUser(user));
+        userService.resetFine(userId);
         return ResponseEntity.status(HttpStatus.OK).body("Amount paid");
     }
 }
