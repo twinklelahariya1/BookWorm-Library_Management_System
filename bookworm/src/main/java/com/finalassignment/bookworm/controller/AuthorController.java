@@ -59,7 +59,7 @@ public class AuthorController {
      * Getting all the data of Author form database.
      * @return
      */
-    @GetMapping("/bookworm/showAllAuthors")
+        @GetMapping("/bookworm/showAllAuthors")
     public ResponseEntity<List> showAllAuthors() {
 
         log.debug("Showing all the Authors whose books are present in library");

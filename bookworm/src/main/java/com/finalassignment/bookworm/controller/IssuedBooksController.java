@@ -41,23 +41,23 @@ public class IssuedBooksController {
 
     }
 
-    @PostMapping("/bookworm/user/issueBook/{bookId}/{cardId}")
-    public ResponseEntity<IssuedBooksDto> issueBook(@Valid @RequestBody IssuedBooksDto issuedBooksDto, @PathVariable Long bookId, @PathVariable Long cardId) {
+    @PostMapping("/bookworm/user/issueBook/{bookId}/{cardId}/{inventoryId}")
+    public ResponseEntity<IssuedBooksDto> issueBook(@Valid @RequestBody IssuedBooksDto issuedBooksDto, @PathVariable Long bookId, @PathVariable Long cardId,@PathVariable Long inventoryId) {
 
 
         log.info("Issuing a book using book id and user card id");
         Book book = bookService.findById(bookId);
         UserLibraryCard userLibraryCard = userLibraryCardService.findById(cardId);
 
-        BookInventory bookInventory= bookInventoryService.findById(bookId);
+        BookInventory bookInventory= bookInventoryService.findById(inventoryId);
         bookInventory.setQuantityOfBooks(bookInventory.getQuantityOfBooks()-1);
         return new ResponseEntity(issuedBooksService.addBooksToCard(issuedBooksDto, book, userLibraryCard), new HttpHeaders(), HttpStatus.OK);
     }
-    @DeleteMapping("/bookworm/user/returnBook/{issueId}")
-    public ResponseEntity<Object> returnBook(@PathVariable Long issueId) {
+    @DeleteMapping("/bookworm/user/returnBook/{issueId}/{userId}/{inventoryId}")
+    public ResponseEntity<Object> returnBook(@PathVariable Long issueId,@PathVariable Long userId,@PathVariable Long inventoryId) {
 
         log.info("Returning book");
-        issuedBooksService.deleteIssue(issueId);
+        issuedBooksService.deleteIssue(issueId,userId,inventoryId);
 
         return ResponseEntity.status(HttpStatus.OK).body("The data is deleted");
     }

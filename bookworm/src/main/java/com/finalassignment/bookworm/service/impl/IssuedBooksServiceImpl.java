@@ -52,18 +52,16 @@ public class IssuedBooksServiceImpl implements IssuedBooksService {
     }
 
     @Override
-    public void deleteIssue(Long issueId) {
+    public void deleteIssue(Long issueId,Long userId, Long inventoryId) {
 
-        deletionUtil(issueId);
+        deletionUtil(issueId,userId,inventoryId);
         issuedBooksRepository.deleteById(issueId);
     }
 
-    private void deletionUtil(Long issueId) {
+    private void deletionUtil(Long issueId,Long userId,Long inventoryId) {
         IssuedBooks issuedBooks = issuedBooksRepository.findById(issueId).orElseThrow(()-> new DataNotFoundException("Issue with id "+issueId+" Not found"));
-        Book book = issuedBooks.getBooks();
-        Long bookId = book.getBookId();
 
-        BookInventory bookInventory = bookInventoryService.findById(bookId);
+        BookInventory bookInventory = bookInventoryService.findById(inventoryId);
         bookInventory.setQuantityOfBooks(bookInventory.getQuantityOfBooks() + 1);
 
         LocalDate issueDate = issuedBooks.getIssueDate();
@@ -72,10 +70,7 @@ public class IssuedBooksServiceImpl implements IssuedBooksService {
         Period period = Period.between(issueDate, returnDate);
         int difference = period.getDays();
 
-        UserLibraryCard userLibraryCard = issuedBooks.getUserLibraryCard();
-        Long cardId = userLibraryCard.getCardId();
-
-        User user = userService.findById(cardId);
+        User user = userService.findById(userId);
 
         if (difference > 7) {
             int fine = difference * 5;

@@ -22,7 +22,7 @@ public class BookInventory {
 
     @Column(name = "quantity_of_books")
     @Min(0)
-    @Max(5)
+    @Max(10)
     private Long quantityOfBooks;
 
     @OneToOne(cascade = CascadeType.ALL)

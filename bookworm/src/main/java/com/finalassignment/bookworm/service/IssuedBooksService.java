@@ -12,5 +12,5 @@ public interface IssuedBooksService {
     IssuedBooksDto addBooksToCard(IssuedBooksDto issuedBooksDto, Book book, UserLibraryCard userLibraryCard);
     List<IssuedBooks> getIssuedBookDetails();
     IssuedBooks findById(Long issueId);
-    void deleteIssue(Long issueId);
+    void deleteIssue(Long issueId,Long userId,Long inventoryId);
 }
