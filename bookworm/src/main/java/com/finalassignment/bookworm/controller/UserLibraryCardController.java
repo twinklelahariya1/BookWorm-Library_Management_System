@@ -1,9 +1,9 @@
 package com.finalassignment.bookworm.controller;
 
 
-import com.finalassignment.bookworm.model.Book;
+import com.finalassignment.bookworm.dto.UserDto;
+import com.finalassignment.bookworm.dto.UserLibraryCardDto;
 import com.finalassignment.bookworm.model.User;
-import com.finalassignment.bookworm.model.UserLibraryCard;
 import com.finalassignment.bookworm.service.impl.BookServiceImpl;
 import com.finalassignment.bookworm.service.impl.UserLibraryCardServiceImpl;
 import com.finalassignment.bookworm.service.impl.UserServiceImpl;
@@ -31,13 +31,12 @@ public class UserLibraryCardController {
     }
 
 
-    @PostMapping("/bookworm/generateUserCard/{userId}/{bookId}")
-    public ResponseEntity<UserLibraryCard> generateUserCard(@Valid @RequestBody UserLibraryCard userLibraryCard, @PathVariable Long userId, @PathVariable Long bookId) {
+    @PostMapping("/bookworm/generateUserCard/{userId}")
+    public ResponseEntity<UserLibraryCardDto> generateUserCard(@Valid @RequestBody UserLibraryCardDto userLibraryCardDto, @PathVariable Long userId) {
 
-        Book book = bookService.findById(userId);
         User user = userService.findById(userId);
 
-        UserLibraryCard addCard = userLibraryCardService.addLibraryCardEntry(userLibraryCard);
+        UserLibraryCardDto addCard = userLibraryCardService.addLibraryCardEntry(userLibraryCardDto,user);
         return new ResponseEntity(addCard, new HttpHeaders(), HttpStatus.OK);
 
     }
@@ -48,10 +47,4 @@ public class UserLibraryCardController {
 
     }
 
-    @PostMapping("/bookworm/issue/{userId}")
-    public ResponseEntity<UserLibraryCard> addIssue(@Valid @RequestBody UserLibraryCard userLibraryCard, @PathVariable Long userId) {
-        User user = userService.findById(userId);
-        userLibraryCard.setUser(user);
-        return new ResponseEntity(userLibraryCardService.addLibraryCardEntry(userLibraryCard), new HttpHeaders(), HttpStatus.OK);
-    }
 }

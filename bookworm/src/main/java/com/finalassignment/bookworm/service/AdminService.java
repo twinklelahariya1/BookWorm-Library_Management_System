@@ -8,6 +8,6 @@ import java.util.List;
 public interface AdminService {
 
     AdminDto addAdmin(AdminDto adminDto);
-    List<AdminDto> getAdmin();
-    AdminDto findById(Long adminId);
+    List<Admin> getAdmin();
+    Admin findById(Long adminId);
 }

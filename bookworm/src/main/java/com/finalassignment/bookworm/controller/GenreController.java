@@ -1,7 +1,7 @@
 package com.finalassignment.bookworm.controller;
 
 
-import com.finalassignment.bookworm.exception.GenreNotFoundException;
+import com.finalassignment.bookworm.dto.GenreDto;
 import com.finalassignment.bookworm.model.Genre;
 import com.finalassignment.bookworm.service.impl.GenreServiceImpl;
 import org.springframework.http.HttpHeaders;
@@ -22,9 +22,9 @@ public class GenreController {
     }
 
     @PostMapping("/bookworm/addGenre")
-    public ResponseEntity<Genre> addGenre(@Valid @RequestBody Genre genre) {
+    public ResponseEntity<GenreDto> addGenre(@Valid @RequestBody GenreDto genreDto) {
 
-        Genre addGenre = genreService.addGenre(genre);
+        GenreDto addGenre = genreService.addGenre(genreDto);
         return new ResponseEntity(addGenre, new HttpHeaders(), HttpStatus.OK);
 
     }

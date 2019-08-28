@@ -2,10 +2,9 @@ package com.finalassignment.bookworm.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.finalassignment.bookworm.model.Author;
+import com.finalassignment.bookworm.model.Genre;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -13,19 +12,14 @@ import java.util.List;
 
 @Setter
 @Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookDto {
 
-    private Long bookId;
-
     private String bookName;
-
-    private AuthorDto author;
 
     private GenreDto genre;
 
-    private List<IssuedBooksDto> issuedBooks;
-
-
+    private AuthorDto author;
 }

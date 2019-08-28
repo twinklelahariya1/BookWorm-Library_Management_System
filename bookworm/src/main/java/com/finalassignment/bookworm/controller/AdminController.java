@@ -1,6 +1,7 @@
 package com.finalassignment.bookworm.controller;
 
 import com.finalassignment.bookworm.dto.AdminDto;
+import com.finalassignment.bookworm.model.Admin;
 import com.finalassignment.bookworm.service.impl.AdminServiceImpl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ public class AdminController {
 
 
     @GetMapping(value = "/bookworm/showAdminById/{admin_id}")
-    public AdminDto  showAdminById(@PathVariable Long admin_id) {
+    public Admin showAdminById(@PathVariable Long admin_id) {
 //      log.debug("Getting Customers By Id.");
         return adminService.findById(admin_id);
     }

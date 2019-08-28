@@ -1,10 +1,9 @@
 package com.finalassignment.bookworm.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.finalassignment.bookworm.model.Book;
+import com.finalassignment.bookworm.model.UserLibraryCard;
+import lombok.*;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -12,11 +11,10 @@ import java.time.LocalDate;
 
 @Setter
 @Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class IssuedBooksDto {
-
-    private Long issueId;
 
     private LocalDate issueDate;
 

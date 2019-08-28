@@ -1,5 +1,6 @@
 package com.finalassignment.bookworm.controller;
 
+import com.finalassignment.bookworm.dto.UserDto;
 import com.finalassignment.bookworm.model.User;
 import com.finalassignment.bookworm.service.impl.UserServiceImpl;
 import org.springframework.http.HttpHeaders;
@@ -21,9 +22,9 @@ public class UserController {
     }
 
     @PostMapping("/bookworm/addUser")
-    public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
+    public ResponseEntity<UserDto> addUser(@Valid @RequestBody UserDto userDto) {
 
-        User addUser = userService.addUser(user);
+        UserDto addUser = userService.addUser(userDto);
         return new ResponseEntity(addUser, new HttpHeaders(), HttpStatus.OK);
 
     }
@@ -39,6 +40,8 @@ public class UserController {
         return ResponseEntity.ok(userService.getUser());
     }
 
+
+    //refactor
     @PostMapping("/bookworm/payFine/{userId}")
     public ResponseEntity<Object> payFine(@PathVariable Long userId){
 

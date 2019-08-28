@@ -1,5 +1,6 @@
 package com.finalassignment.bookworm.controller;
 
+import com.finalassignment.bookworm.dto.AuthorDto;
 import com.finalassignment.bookworm.exception.AuthorNotFoundException;
 import com.finalassignment.bookworm.model.Author;
 import com.finalassignment.bookworm.service.impl.AuthorServiceImpl;
@@ -23,9 +24,9 @@ public class AuthorController {
     }
 
     @PostMapping("/bookworm/addAuthor")
-    public ResponseEntity<Author> addAuthor(@Valid @RequestBody Author author) {
+    public ResponseEntity<AuthorDto> addAuthor(@Valid @RequestBody AuthorDto authorDto) {
 
-        Author addAuthor = authorService.addAuthor(author);
+        AuthorDto addAuthor = authorService.addAuthor(authorDto);
         return new ResponseEntity(addAuthor, new HttpHeaders(), HttpStatus.OK);
 
     }

@@ -1,6 +1,8 @@
 package com.finalassignment.bookworm.controller;
 
 
+import com.finalassignment.bookworm.dto.BookDto;
+import com.finalassignment.bookworm.dto.BookInventoryDto;
 import com.finalassignment.bookworm.model.Book;
 import com.finalassignment.bookworm.model.BookInventory;
 import com.finalassignment.bookworm.service.impl.BookInventoryServiceImpl;
@@ -27,10 +29,9 @@ public class BookInventoryController {
 
 
     @PostMapping("/bookworm/populateInventory/{bookId}")
-    public ResponseEntity<BookInventory> populateInventory(@Valid @RequestBody BookInventory bookInventory, @PathVariable Long bookId) {
+    public ResponseEntity<BookInventoryDto> populateInventory(@Valid @RequestBody BookInventoryDto bookInventoryDto, @PathVariable Long bookId) {
         Book book = bookService.findById(bookId);
-        bookInventory.setBook(book);
-        return new ResponseEntity(bookInventoryService.addBookInventoryEntry(bookInventory), new HttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity(bookInventoryService.addBookInventoryEntry(bookInventoryDto,book), new HttpHeaders(), HttpStatus.OK);
     }
 
     @GetMapping("/bookworm/showInventory")

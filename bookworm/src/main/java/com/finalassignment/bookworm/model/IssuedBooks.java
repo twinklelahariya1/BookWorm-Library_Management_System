@@ -1,18 +1,16 @@
 package com.finalassignment.bookworm.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.*;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Setter
 @Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -25,6 +23,7 @@ public class IssuedBooks {
     private Long issueId;
 
     @Column(name = "issue_date")
+    @NotNull
     private LocalDate issueDate;
 
     @Column(name = "return_date")

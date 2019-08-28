@@ -11,6 +11,9 @@ import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.finalassignment.bookworm.util.DtoUtil.fromAdmin;
+import static com.finalassignment.bookworm.util.DtoUtil.fromAdminDto;
+
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -21,26 +24,7 @@ public class AdminServiceImpl implements AdminService {
         this.adminRepository = adminRepository;
     }
 
-    private static AdminDto fromAdmin(final Admin admin) {
 
-        AdminDto adminDto = new AdminDto();
-        adminDto.setAdminId(admin.getAdminId());
-        adminDto.setAdminName(admin.getAdminName());
-        adminDto.setAdminContactNumber(admin.getAdminContactNumber());
-        adminDto.setAdminEmail(admin.getAdminEmail());
-        adminDto.setAdminPassword(admin.getAdminPassword());
-
-        return adminDto;
-    }
-
-    private static Admin fromAdminDto(final AdminDto adminDto) {
-
-        return Admin.builder().adminContactNumber(adminDto.getAdminContactNumber())
-                .adminEmail(adminDto.getAdminEmail()).adminId(adminDto.getAdminId())
-                .adminName(adminDto.getAdminName())
-                .adminPassword(adminDto.getAdminPassword())
-                .build();
-    }
 
     @Override
     public AdminDto addAdmin(AdminDto adminDto) {
@@ -49,24 +33,13 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<AdminDto> getAdmin() {
-        List<Admin> admins = adminRepository.findAll();
-        List<AdminDto> adminDtos = null;
-        if (!CollectionUtils.isEmpty(admins)) {
-            adminDtos = new ArrayList<>();
-            for (Admin admin : admins) {
-                AdminDto adminDto = fromAdmin(admin);
-                adminDtos.add(adminDto);
-            }
-        }
-        return adminDtos;
+    public List<Admin> getAdmin() {
+        return adminRepository.findAll();
     }
 
     @Override
-    public AdminDto findById(Long adminId) {
+    public Admin findById(Long adminId) {
 
-        Admin admin = adminRepository.findById(adminId).orElseThrow(() -> new AdminNotFoundException(adminId));
-        AdminDto adminDto = fromAdmin(admin);
-        return adminDto;
+        return adminRepository.findById(adminId).orElseThrow(() -> new AdminNotFoundException(adminId));
     }
 }

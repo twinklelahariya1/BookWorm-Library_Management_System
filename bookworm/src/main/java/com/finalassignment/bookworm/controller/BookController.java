@@ -1,6 +1,9 @@
 package com.finalassignment.bookworm.controller;
 
 
+import com.finalassignment.bookworm.dto.AuthorDto;
+import com.finalassignment.bookworm.dto.BookDto;
+import com.finalassignment.bookworm.dto.GenreDto;
 import com.finalassignment.bookworm.model.Author;
 import com.finalassignment.bookworm.model.Book;
 import com.finalassignment.bookworm.model.Genre;
@@ -29,15 +32,11 @@ public class BookController {
     }
 
     @PostMapping("/bookworm/addBook/{authorId}/{genreId}")
-    public ResponseEntity<Book> addBook(@Valid @RequestBody Book book, @PathVariable Long authorId, @PathVariable Long genreId) {
-
+    public ResponseEntity<BookDto> addBook(@Valid @RequestBody BookDto bookDto, @PathVariable Long authorId, @PathVariable Long genreId) {
         Author author = authorService.findById(authorId);
         Genre genre = genreService.findById(genreId);
 
-        book.setAuthor(author);
-        book.setGenre(genre);
-
-        return new ResponseEntity(bookService.addBook(book), new HttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity(bookService.addBook(bookDto,author,genre), new HttpHeaders(), HttpStatus.OK);
 
     }
 
@@ -49,7 +48,6 @@ public class BookController {
 
     @GetMapping("/bookworm/showAllBooks")
     public ResponseEntity<List> showAllBooks() {
-
         return ResponseEntity.ok(bookService.getBook());
 
     }
