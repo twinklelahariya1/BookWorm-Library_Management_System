@@ -4,6 +4,7 @@ package com.finalassignment.bookworm.controller;
 import com.finalassignment.bookworm.dto.UserDto;
 import com.finalassignment.bookworm.dto.UserLibraryCardDto;
 import com.finalassignment.bookworm.model.User;
+import com.finalassignment.bookworm.model.UserLibraryCard;
 import com.finalassignment.bookworm.service.impl.BookServiceImpl;
 import com.finalassignment.bookworm.service.impl.UserLibraryCardServiceImpl;
 import com.finalassignment.bookworm.service.impl.UserServiceImpl;
@@ -47,4 +48,9 @@ public class UserLibraryCardController {
 
     }
 
+    @GetMapping("/bookworm/showCardById/{cardId}")
+    public UserLibraryCard showCardById(@PathVariable Long cardId) {
+//        log.debug("Getting Customers By Id.");
+        return userLibraryCardService.findById(cardId);
+    }
 }
