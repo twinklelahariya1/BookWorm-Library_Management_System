@@ -1,7 +1,7 @@
 package com.finalassignment.bookworm.service.impl;
 
 import com.finalassignment.bookworm.dto.UserLibraryCardDto;
-import com.finalassignment.bookworm.exception.UserLibraryCardNotFoundException;
+import com.finalassignment.bookworm.exception.DataNotFoundException;
 import com.finalassignment.bookworm.model.User;
 import com.finalassignment.bookworm.model.UserLibraryCard;
 import com.finalassignment.bookworm.repository.UserLibraryCardRepository;
@@ -41,6 +41,6 @@ public class UserLibraryCardServiceImpl implements UserLibraryCardService {
     @Override
     public UserLibraryCard findById(Long cardId) {
 
-        return userLibraryCardRepository.findById(cardId).orElseThrow(() -> new UserLibraryCardNotFoundException(cardId));
+        return userLibraryCardRepository.findById(cardId).orElseThrow(() -> new DataNotFoundException("User library card with id "+cardId+" not found"));
     }
 }

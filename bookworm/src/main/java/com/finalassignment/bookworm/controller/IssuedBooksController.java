@@ -33,7 +33,7 @@ public class IssuedBooksController {
         this.userService = userService;
     }
 
-    @GetMapping("/bookworm/showAllIssuedBooks")
+    @GetMapping("/bookworm/user/showAllIssuedBooks")
     public ResponseEntity<List> showIssuedBookDetails() {
 
         log.info("Showing issue id's");
@@ -41,7 +41,7 @@ public class IssuedBooksController {
 
     }
 
-    @PostMapping("/bookworm/issueBook/{bookId}/{cardId}")
+    @PostMapping("/bookworm/user/issueBook/{bookId}/{cardId}")
     public ResponseEntity<IssuedBooksDto> issueBook(@Valid @RequestBody IssuedBooksDto issuedBooksDto, @PathVariable Long bookId, @PathVariable Long cardId) {
 
 
@@ -53,7 +53,7 @@ public class IssuedBooksController {
         bookInventory.setQuantityOfBooks(bookInventory.getQuantityOfBooks()-1);
         return new ResponseEntity(issuedBooksService.addBooksToCard(issuedBooksDto, book, userLibraryCard), new HttpHeaders(), HttpStatus.OK);
     }
-    @DeleteMapping("/bookworm/returnBook/{issueId}")
+    @DeleteMapping("/bookworm/user/returnBook/{issueId}")
     public ResponseEntity<Object> returnBook(@PathVariable Long issueId) {
 
         log.info("Returning book");

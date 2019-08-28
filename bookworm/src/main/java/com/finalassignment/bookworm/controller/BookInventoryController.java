@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-
+/**
+ * Creating the inventory referring to books.
+ */
 @Slf4j
 @RestController
 public class BookInventoryController {
@@ -28,7 +30,13 @@ public class BookInventoryController {
         this.bookService = bookService;
     }
 
-
+    /**
+     * populating inventory mapping with book
+     * popultingInventory is one to one mapped with book
+     * @param bookInventoryDto
+     * @param bookId
+     * @return
+     */
     @PostMapping("/bookworm/populateInventory/{bookId}")
     public ResponseEntity<BookInventoryDto> populateInventory(@Valid @RequestBody BookInventoryDto bookInventoryDto, @PathVariable Long bookId) {
 
@@ -37,6 +45,10 @@ public class BookInventoryController {
         return new ResponseEntity(bookInventoryService.addBookInventoryEntry(bookInventoryDto,book), new HttpHeaders(), HttpStatus.OK);
     }
 
+    /**
+     * Fetching all the inventory data  from database.
+     * @return
+     */
     @GetMapping("/bookworm/showInventory")
     public List<BookInventory> showInventory() {
 

@@ -2,7 +2,7 @@ package com.finalassignment.bookworm.service.impl;
 
 
 import com.finalassignment.bookworm.dto.BookInventoryDto;
-import com.finalassignment.bookworm.exception.BookNotFoundException;
+import com.finalassignment.bookworm.exception.DataNotFoundException;
 import com.finalassignment.bookworm.model.Book;
 import com.finalassignment.bookworm.model.BookInventory;
 import com.finalassignment.bookworm.repository.BookInventoryRepository;
@@ -40,7 +40,7 @@ public class BookInventoryServiceImpl implements BookInventoryService {
 
     @Override
     public BookInventory findById(Long inventoryId) {
-        return bookInventoryRepository.findById(inventoryId).orElseThrow(() -> new BookNotFoundException(inventoryId));
+        return bookInventoryRepository.findById(inventoryId).orElseThrow(() -> new DataNotFoundException("Inventory with id "+ inventoryId+" Not found" ));
 
     }
 }

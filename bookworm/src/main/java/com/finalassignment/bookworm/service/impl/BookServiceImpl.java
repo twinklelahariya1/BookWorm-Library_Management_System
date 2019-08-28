@@ -1,7 +1,7 @@
 package com.finalassignment.bookworm.service.impl;
 
 import com.finalassignment.bookworm.dto.BookDto;
-import com.finalassignment.bookworm.exception.BookNotFoundException;
+import com.finalassignment.bookworm.exception.DataNotFoundException;
 import com.finalassignment.bookworm.model.Author;
 import com.finalassignment.bookworm.model.Book;
 import com.finalassignment.bookworm.model.Genre;
@@ -48,6 +48,6 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book findById(Long bookId) {
 
-        return bookRepository.findById(bookId).orElseThrow(() -> new BookNotFoundException(bookId));
+        return bookRepository.findById(bookId).orElseThrow(() -> new DataNotFoundException("Book with Id "+ bookId +" not found" ));
     }
 }

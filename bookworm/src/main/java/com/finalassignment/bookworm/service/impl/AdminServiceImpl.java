@@ -1,17 +1,14 @@
 package com.finalassignment.bookworm.service.impl;
 
 import com.finalassignment.bookworm.dto.AdminDto;
-import com.finalassignment.bookworm.exception.AdminNotFoundException;
+import com.finalassignment.bookworm.exception.DataNotFoundException;
 import com.finalassignment.bookworm.model.Admin;
 import com.finalassignment.bookworm.repository.AdminRepository;
 import com.finalassignment.bookworm.service.AdminService;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.finalassignment.bookworm.util.DtoUtil.fromAdmin;
 import static com.finalassignment.bookworm.util.DtoUtil.fromAdminDto;
 
 
@@ -40,6 +37,6 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Admin findById(Long adminId) {
 
-        return adminRepository.findById(adminId).orElseThrow(() -> new AdminNotFoundException(adminId));
+        return adminRepository.findById(adminId).orElseThrow(() -> new DataNotFoundException("Admin Not Found for id "+ adminId));
     }
 }

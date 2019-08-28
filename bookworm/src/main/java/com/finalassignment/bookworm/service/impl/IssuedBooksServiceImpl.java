@@ -2,7 +2,7 @@ package com.finalassignment.bookworm.service.impl;
 
 
 import com.finalassignment.bookworm.dto.IssuedBooksDto;
-import com.finalassignment.bookworm.exception.IssueBookNotFoundException;
+import com.finalassignment.bookworm.exception.DataNotFoundException;
 import com.finalassignment.bookworm.model.*;
 import com.finalassignment.bookworm.repository.IssuedBooksRepository;
 import com.finalassignment.bookworm.service.IssuedBooksService;
@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 
-import static com.finalassignment.bookworm.util.DtoUtil.*;
+import static com.finalassignment.bookworm.util.DtoUtil.fromIssuedBooksDto;
 
 @Service
 public class IssuedBooksServiceImpl implements IssuedBooksService {
@@ -48,7 +48,7 @@ public class IssuedBooksServiceImpl implements IssuedBooksService {
     @Override
     public IssuedBooks findById(Long issueId) {
 
-        return issuedBooksRepository.findById(issueId).orElseThrow(() -> new IssueBookNotFoundException(issueId));
+        return issuedBooksRepository.findById(issueId).orElseThrow(() -> new DataNotFoundException("Issue with id "+issueId+" Not found"));
     }
 
     @Override
@@ -59,7 +59,7 @@ public class IssuedBooksServiceImpl implements IssuedBooksService {
     }
 
     private void deletionUtil(Long issueId) {
-        IssuedBooks issuedBooks = issuedBooksRepository.findById(issueId).orElseThrow(()-> new IssueBookNotFoundException(issueId));
+        IssuedBooks issuedBooks = issuedBooksRepository.findById(issueId).orElseThrow(()-> new DataNotFoundException("Issue with id "+issueId+" Not found"));
         Book book = issuedBooks.getBooks();
         Long bookId = book.getBookId();
 
