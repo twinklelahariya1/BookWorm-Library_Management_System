@@ -2,20 +2,20 @@ package com.finalassignment.bookworm.controller;
 
 
 import com.finalassignment.bookworm.dto.IssuedBooksDto;
-import com.finalassignment.bookworm.model.*;
+import com.finalassignment.bookworm.model.Book;
+import com.finalassignment.bookworm.model.BookInventory;
+import com.finalassignment.bookworm.model.UserLibraryCard;
 import com.finalassignment.bookworm.service.impl.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 
-import static com.finalassignment.bookworm.util.DtoUtil.fromBookInventory;
-
+@Slf4j
 @RestController
 public class IssuedBooksController {
 
@@ -35,6 +35,8 @@ public class IssuedBooksController {
 
     @GetMapping("/bookworm/showAllIssuedBooks")
     public ResponseEntity<List> showIssuedBookDetails() {
+
+        log.info("Showing issue id's");
         return ResponseEntity.ok(issuedBooksService.getIssuedBookDetails());
 
     }
@@ -42,6 +44,8 @@ public class IssuedBooksController {
     @PostMapping("/bookworm/issueBook/{bookId}/{cardId}")
     public ResponseEntity<IssuedBooksDto> issueBook(@Valid @RequestBody IssuedBooksDto issuedBooksDto, @PathVariable Long bookId, @PathVariable Long cardId) {
 
+
+        log.info("Issuing a book using book id and user card id");
         Book book = bookService.findById(bookId);
         UserLibraryCard userLibraryCard = userLibraryCardService.findById(cardId);
 
@@ -52,6 +56,7 @@ public class IssuedBooksController {
     @DeleteMapping("/bookworm/returnBook/{issueId}")
     public ResponseEntity<Object> returnBook(@PathVariable Long issueId) {
 
+        log.info("Returning book");
         issuedBooksService.deleteIssue(issueId);
 
         return ResponseEntity.status(HttpStatus.OK).body("The data is deleted");
